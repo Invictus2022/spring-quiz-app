@@ -29,4 +29,19 @@ public class QuestionService implements QuestionServiceImpl {
             return  null;
         }
     }
+
+    @Override
+    public Question saveQuiz(Question quiz){
+        return questionRepository.save(quiz);
+    }
+
+    @Override
+    public String deleteQuiz(Integer id){
+        if (questionRepository.findById(id).isPresent()){
+            questionRepository.deleteById(id);
+            return "Quiz successfully deleted";
+        }else {
+            return "No such quiz foud in database";
+        }
+    }
 }
