@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface QuestionServiceImpl {
      List<Question> getQuestions();
+     Question getQuizById(Integer id);
 }
