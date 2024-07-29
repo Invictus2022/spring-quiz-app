@@ -13,6 +13,7 @@ public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
+    private  String category;
     private String questiontitle;
     private String option1;
     private String option2;

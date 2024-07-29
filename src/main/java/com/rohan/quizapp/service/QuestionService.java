@@ -4,22 +4,33 @@ package com.rohan.quizapp.service;
 import com.rohan.quizapp.model.Question;
 import com.rohan.quizapp.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 public class QuestionService implements QuestionServiceImpl {
     @Autowired
     private QuestionRepository questionRepository;
 
+//    Get all questions;
     @Override
-    public List<Question> getQuestions(){
-        List<Question> allQuestions = questionRepository.findAll();
-        return  allQuestions;
+    public ResponseEntity<List<Question>> getQuestions() {
+        try {
+
+            return new ResponseEntity<>(questionRepository.findAll(), HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
 
+//    Get quiz by id;
     @Override
     public Question getQuizById(Integer id){
         Optional<Question> singleQuestion = questionRepository.findById(id);
@@ -30,10 +41,13 @@ public class QuestionService implements QuestionServiceImpl {
         }
     }
 
+//     Save new Quiz;
     @Override
-    public Question saveQuiz(Question quiz){
-        return questionRepository.save(quiz);
+    public String saveQuiz(Question quiz){
+         questionRepository.save(quiz);
+         return "Data Successfully added";
     }
+
 
     @Override
     public String deleteQuiz(Integer id){
@@ -43,5 +57,17 @@ public class QuestionService implements QuestionServiceImpl {
         }else {
             return "No such quiz foud in database";
         }
+    }
+
+
+//    Get quiz by category.
+    @Override
+    public ResponseEntity<List<Question>> getQuesByCategory(String category){
+        try{
+        return new ResponseEntity<>(questionRepository.findByCategory(category),HttpStatus.OK) ;
+    }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
 }
