@@ -15,12 +15,12 @@ public class QuestionController {
     @Autowired
     QuestionServiceImpl questionService;
 
-    @GetMapping("/quiz")
+    @GetMapping("/ques")
     public ResponseEntity<List<Question>> getAllQuestions(){
         return questionService.getQuestions();
     }
 
-    @GetMapping("/quiz/{id}")
+    @GetMapping("/ques/{id}")
     public Question getQuizById(@PathVariable("id") Integer id){
         return questionService.getQuizById(id);
     }
@@ -29,7 +29,7 @@ public class QuestionController {
     public String deleteQuiz(@PathVariable("id") Integer id){
         return questionService.deleteQuiz(id);
     }
-    @PostMapping("/quiz")
+    @PostMapping("/ques")
     public String saveQuiz(@RequestBody Question quiz){
           return questionService.saveQuiz(quiz);
     }
