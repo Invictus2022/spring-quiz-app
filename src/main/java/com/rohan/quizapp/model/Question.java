@@ -45,5 +45,9 @@ public class Question {
     private String option3;
     private String option4;
     private String rightanswer;
+
+    public String getRightanswer() {
+        return rightanswer;
+    }
     private String difficultylevel;
 }

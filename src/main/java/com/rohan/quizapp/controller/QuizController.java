@@ -2,7 +2,7 @@ package com.rohan.quizapp.controller;
 
 
 import com.rohan.quizapp.model.QuestionWrapper;
-import com.rohan.quizapp.service.QuizServiceImpl;
+import com.rohan.quizapp.model.AnswersWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,5 +26,10 @@ public class QuizController {
     @GetMapping("/get/{id}")
     public ResponseEntity <List<QuestionWrapper>> getQuiz(@PathVariable int id){
         return  quizService.getQuizByid(id);
+    }
+
+    @PostMapping("/submit/{id}")
+    public ResponseEntity<Integer> submitQuiz(@PathVariable Integer id, @RequestParam List<AnswersWrapper> answer){
+        return quizService.getAnswers(id,answer);
     }
 }

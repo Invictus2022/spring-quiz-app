@@ -1,6 +1,15 @@
 package com.rohan.quizapp.model;
 
-public class Answers {
+
+import lombok.Data;
+
+@Data
+public class AnswersWrapper {
     private Integer id;
-    private  Question Answers;
+    private  String Answers;
+
+
+    public String getAnswers() {
+        return Answers;
+    }
 }
