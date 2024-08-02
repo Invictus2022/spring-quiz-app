@@ -1,5 +1,6 @@
 package com.rohan.quizapp.service;
 
+import com.rohan.quizapp.model.AnswersWrapper;
 import com.rohan.quizapp.model.QuestionWrapper;
 import org.springframework.http.ResponseEntity;
 
@@ -9,4 +10,6 @@ public interface QuizServiceImpl {
     ResponseEntity<String> createQuiz(String category, Integer numQ, String title);
 
     ResponseEntity<List<QuestionWrapper>> getQuizByid(Integer id);
+
+    ResponseEntity<Integer> getAnswers(Integer id, List<AnswersWrapper> answers);
 }

@@ -1,6 +1,7 @@
 package com.rohan.quizapp.service;
 
 
+import com.rohan.quizapp.model.AnswersWrapper;
 import com.rohan.quizapp.model.Question;
 import com.rohan.quizapp.model.QuestionWrapper;
 import com.rohan.quizapp.model.Quiz;
@@ -48,5 +49,22 @@ public class QuizService implements QuizServiceImpl{
             questionForUser.add(qw);
         }
         return  new ResponseEntity<>(questionForUser,HttpStatus.OK);
+    }
+
+
+    @Override
+    public ResponseEntity<Integer> getAnswers(Integer id, List<AnswersWrapper> answers) {
+        Quiz quiz = quizRepository.findById(id).orElseThrow(() -> new RuntimeException("Quiz not found"));
+        List<Question> questions = quiz.getQuestion();
+
+        int right = 0;
+        int i = 0;
+        for (AnswersWrapper answer : answers){
+            if(answer.getAnswers().equals(questions.get(i).getRightanswer())) {
+                right++;
+            }
+            i++;
+        }
+        return  new ResponseEntity<>(right, HttpStatus.OK);
     }
 }
